@@ -1,0 +1,62 @@
+type User {
+  id: ID! @unique
+  nome: String!
+  email: String! @unique
+  password: String!
+}
+
+type Cliente {
+  id: ID! @unique
+  nome: String
+  telefone: String
+  endereco: String
+  email: String  @unique
+  cpf: String @unique
+  cep: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum TipoReceita {
+  MENSALIDADE
+  DIARIA
+  PERIODO
+}
+
+type Receita {
+  id: ID! @unique
+  cliente: Cliente
+  descricao: String!
+  entrada: DateTime
+  valor: Float! 
+  tipo: TipoReceita!
+  quantidade: Int
+}
+
+type Documento {
+  id: ID! @unique
+  cliente: Cliente
+  descricao: String!
+  updateAt: DateTime!
+  createdAt: DateTime!
+}
+
+enum Perfil {
+  FINAN
+  ADMIN
+  COMPR
+  COLAB
+}
+
+enum Status {
+  CONCLUIDO
+  INICIADO
+  PENDENTE
+  CANCELADO
+}
+
+enum TipoPonto {
+  ENTRADA
+  SAIDA
+}
+

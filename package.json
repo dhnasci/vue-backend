@@ -1,0 +1,21 @@
+{
+  "name": "_VueBack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index",
+    "dev": "npx nodemon --delay 1000ms --ext js,graphql src/index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "graphql-yoga": "1.17.4",
+    "prisma-binding": "2.3.16",
+    "prisma-client-lib": "^1.28.3"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.10"
+  }
+}

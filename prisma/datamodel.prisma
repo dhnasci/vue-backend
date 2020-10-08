@@ -3,6 +3,8 @@ type User {
   nome: String!
   email: String! @unique
   password: String!
+  perfil: Perfil! 
+  createdAt: DateTime!
 }
 
 type Cliente {
@@ -60,3 +62,25 @@ enum TipoPonto {
   SAIDA
 }
 
+type Categoria {
+  id: ID! @unique
+  descricao: String!
+}
+
+type SubCategoria {
+  id: ID! @unique
+  descricao: String!
+  categoria: Categoria!
+}
+
+type Material {
+  id: ID! @unique
+  descricao: String!
+  quantidade: Int!
+  valor: Float!
+  compra: DateTime!
+  subcategoria: SubCategoria!
+  usuario: String!
+  createdAt: DateTime!
+  updateAt: DateTime!
+}

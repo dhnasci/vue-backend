@@ -1,7 +1,18 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const {getUserId} = require('./../utils')
 
 const JWT_SECRET = process.env.JWT_SECRET
+
+async function criaCategoria (_, { descricao }, ctx, info){
+  const userId = getUserId(ctx)
+  return ctx.db.mutation.createCategoria({ 
+    data: {
+      descricao
+    }
+
+  }, info)
+}
 
 async function login (_, {email, password}, ctx, info) {
 
@@ -30,7 +41,6 @@ async function signup (_, args, ctx, info) {
   const user = await ctx.db.mutation.createUser({ data: { ...args, password } })
 
   const token = jwt.sign( {userId: user.id}, JWT_SECRET, { expiresIn: '2h'}  )
-  console.log('Senha: ', password)
 
   return {
     token,
@@ -39,7 +49,10 @@ async function signup (_, args, ctx, info) {
 }
 
 
+
+
 module.exports = {
+  criaCategoria,
   signup, 
   login
 }

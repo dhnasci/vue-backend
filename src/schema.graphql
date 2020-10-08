@@ -3,8 +3,9 @@ type Query {
 }
 
 type Mutation {
+  criaCategoria(descricao: String!): Categoria!
   login(email: String!, password: String!): AuthPayload
-  signup(email: String!, password: String!, nome: String!): AuthPayload
+  signup(email: String!, password: String!, nome: String!, perfil: Perfil!): AuthPayload
 }
 
 type AuthPayload {
@@ -16,4 +17,29 @@ type User {
   id: ID!   
   nome: String!
   email: String! 
+  perfil: Perfil!
+}
+
+type Categoria {
+  id: ID! 
+  descricao: String!
+}
+
+enum Perfil {
+  FINAN
+  ADMIN
+  COMPR
+  COLAB
+}
+
+enum Status {
+  CONCLUIDO
+  INICIADO
+  PENDENTE
+  CANCELADO
+}
+
+enum TipoPonto {
+  ENTRADA
+  SAIDA
 }

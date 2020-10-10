@@ -1,9 +1,25 @@
+scalar Date
+scalar DateTime
+
 type Query {
+  categorias: [ Categoria!]!
   user: User
 }
 
 type Mutation {
   criaCategoria(descricao: String!): Categoria!
+  criaReceitaMensal( 
+    descricao: String!,
+    entrada: Date!,
+    valor: Float!, 
+    idCliente: String! ): Receita!
+  criaCliente(
+    nome: String!
+    telefone: String!
+    endereco: String
+    cpf: String!
+    cep: String
+   ): Cliente!
   login(email: String!, password: String!): AuthPayload
   signup(email: String!, password: String!, nome: String!, perfil: Perfil!): AuthPayload
 }
@@ -42,4 +58,31 @@ enum Status {
 enum TipoPonto {
   ENTRADA
   SAIDA
+}
+
+type Receita {
+  id: ID!
+  cliente: Cliente
+  descricao: String!
+  entrada: Date!
+  valor: Float! 
+  tipo: TipoReceita!
+  quantidade: Int
+}
+
+enum TipoReceita {
+  MENSALIDADE
+  DIARIA
+  PERIODO
+}
+
+type Cliente {
+  nome: String
+  telefone: String
+  endereco: String
+  email: String  
+  cpf: String 
+  cep: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }

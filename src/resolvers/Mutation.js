@@ -1,12 +1,46 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const moment = require('moment')
 const {getUserId} = require('./../utils')
 
 const JWT_SECRET = process.env.JWT_SECRET
 
-async function criaCategoria (_, { descricao }, ctx, info){
+function criaCliente (_, args, ctx, info) {
+  return ctx.db.mutation.createCliente( { 
+    data:{
+      ...args
+    }
+  }, info)
+  
+}
+
+function criaReceitaMensal (_, { descricao, entrada, valor, idCliente }, ctx, info){
+
+  const date = moment(args.entrada)
+  if (!date.isValid){
+    throw new Error('Entrada não é data válida!')
+  }
+  
+  return ctx.db.mutation.createReceita({
+    data: {
+      descricao,
+      entrada,
+      valor,
+      tipo: MENSALIDADE,
+      quantidade: 1,
+      cliente: {
+        connect: {
+          id: idCliente
+        }
+      }
+    } 
+  } ,info)
+
+}
+
+function criaCategoria (_, { descricao }, ctx, info){
   const userId = getUserId(ctx)
-  return ctx.db.mutation.createCategoria({ 
+  return ctx.db.mutation.createReceita({ 
     data: {
       descricao
     }
@@ -52,6 +86,8 @@ async function signup (_, args, ctx, info) {
 
 
 module.exports = {
+  criaCliente,
+  criaReceitaMensal,
   criaCategoria,
   signup, 
   login

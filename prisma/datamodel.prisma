@@ -29,7 +29,7 @@ type Receita {
   id: ID! @unique
   cliente: Cliente
   descricao: String!
-  entrada: DateTime
+  entrada: DateTime!
   valor: Float! 
   tipo: TipoReceita!
   quantidade: Int

@@ -9,16 +9,17 @@ type Query {
 type Mutation {
   criaCategoria(descricao: String!): Categoria!
   criaReceitaMensal( 
-    descricao: String!,
-    entrada: Date!,
-    valor: Float!, 
-    idCliente: String! ): Receita!
+    descricao: String!
+    entrada: Date!
+    valor: Float!
+ ): Receita!
   criaCliente(
     nome: String!
     telefone: String!
     endereco: String
     cpf: String!
     cep: String
+    email: String
    ): Cliente!
   login(email: String!, password: String!): AuthPayload
   signup(email: String!, password: String!, nome: String!, perfil: Perfil!): AuthPayload

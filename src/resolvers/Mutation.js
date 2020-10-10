@@ -1,14 +1,16 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const moment = require('moment')
-const {getUserId} = require('./../utils')
+const { getUserId } = require('./../utils')
 
 const JWT_SECRET = process.env.JWT_SECRET
 
 function criaCliente (_, args, ctx, info) {
+  const userId = getUserId(ctx)
   return ctx.db.mutation.createCliente( { 
     data:{
-      ...args
+      ...args, 
+      usuarioId: userId
     }
   }, info)
   
@@ -40,7 +42,7 @@ function criaReceitaMensal (_, { descricao, entrada, valor, idCliente }, ctx, in
 
 function criaCategoria (_, { descricao }, ctx, info){
   const userId = getUserId(ctx)
-  return ctx.db.mutation.createReceita({ 
+  return ctx.db.mutation.createCategoria({ 
     data: {
       descricao
     }
@@ -81,9 +83,6 @@ async function signup (_, args, ctx, info) {
     user
   }
 }
-
-
-
 
 module.exports = {
   criaCliente,

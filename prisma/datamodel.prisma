@@ -4,7 +4,7 @@ type User {
   email: String! @unique
   password: String!
   perfil: Perfil! 
-  createdAt: DateTime!
+  
 }
 
 type Cliente {
@@ -15,8 +15,7 @@ type Cliente {
   email: String  @unique
   cpf: String @unique
   cep: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  usuarioId: String!
 }
 
 enum TipoReceita {
@@ -39,8 +38,7 @@ type Documento {
   id: ID! @unique
   cliente: Cliente
   descricao: String!
-  updateAt: DateTime!
-  createdAt: DateTime!
+  usuarioId: String!
 }
 
 enum Perfil {
@@ -80,7 +78,5 @@ type Material {
   valor: Float!
   compra: DateTime!
   subcategoria: SubCategoria!
-  usuario: String!
-  createdAt: DateTime!
-  updateAt: DateTime!
+  usuarioId: String!
 }
